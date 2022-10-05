@@ -9,6 +9,7 @@ namespace Pokemon
             try {
             Pokemon Charmander = Business.NewPokemon("Charmander", 5, new List<string>() {"Tackle", "Leer", "Ember"}, "Oran Berry");
             Pokemon Squritle = Business.NewPokemon("Squirtle", 5, new List<string>() {"Pound", "Growl", "Water Gun"});
+            Squritle.Nature = PokemonNature.Adamant;
             InterActiveConsole(new() {Squritle}, new() {Charmander});
             }
             catch (InvalidLevelException e)
@@ -33,6 +34,7 @@ namespace Pokemon
             Battle? battle = null;
             while (true)
             {
+                try {
                 System.Console.Write(">");
                 string? nextText = Console.ReadLine();
                 if (nextText != null) {
@@ -53,6 +55,13 @@ namespace Pokemon
                             if (pokemon.Name == splitted[2]) System.Console.WriteLine(Business.ShowAvailableMoves(pokemon));
                         }
                     }
+                    if (splitted[0] == "show" && splitted[1] == "stats")
+                    {
+                        foreach (Pokemon pokemon in pokemons)
+                        {
+                            if (pokemon.Name == splitted[2]) System.Console.WriteLine(Business.ShowPokemonStats(pokemon));
+                        }
+                    }
                     if (splitted[0] == "show" && splitted[1] == "battle")
                     {
                         if (battle != null)
@@ -63,6 +72,15 @@ namespace Pokemon
                         if (battle != null)
                         try {
                             System.Console.WriteLine(Business.UseMoveInBattle(battle, nextText.Split(new [] {"use "}, StringSplitOptions.None)[1]));
+                            if (Business.IsBattleOver(battle)) {
+                                System.Console.WriteLine("Battle is over!");
+                                if (Business.IsPlayerPartyAlive(pokemons)) {
+                                    System.Console.WriteLine($"You defeated {TrainerCategory.Rival} {"Gary"}!");
+                                }
+                                else {
+                                    System.Console.WriteLine("You blacked out!");
+                                }
+                            }
                         }
                         catch (InvalidMoveException e)
                         {
@@ -70,6 +88,11 @@ namespace Pokemon
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
+
+            }
             }
         }
     }

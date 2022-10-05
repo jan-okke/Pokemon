@@ -1,4 +1,4 @@
 namespace Pokemon
 {
-    enum PokemonStatus{OK, Burned, Poisoned, Paralyzed, Frozen, Sleeping}
+    enum PokemonStatus{OK, Burned, Poisoned, Paralyzed, Frozen, Sleeping, Fainted}
 }

@@ -18,8 +18,9 @@ namespace Pokemon
         public PokemonStatus Status;        // Status condition
         public int StatusTurnsLeft;         // Status condition turns left
         public Item? HeldItem;              // Held Item
+        public int ExpYield;                // Exp Yield for defeating
         public bool isAlive = true;
-        public Pokemon(string name, int level, Stats baseStats, List<PokemonType> pokemonTypes)
+        public Pokemon(string name, int level, Stats baseStats, List<PokemonType> pokemonTypes, int expYield)
         {
             EVS = new(0,0,0,0,0,0);
             IVS = new(0,0,0,0,0,0);
@@ -35,9 +36,9 @@ namespace Pokemon
             CurrentHP = (int)Stats.HP;
             Nature = PokemonNature.None;
             HeldItem = null;
+            ExpYield = expYield;
             Status = PokemonStatus.OK;
             StatusTurnsLeft = 0;
-            System.Console.WriteLine();
         }
     }
 }

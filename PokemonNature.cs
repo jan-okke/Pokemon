@@ -1,4 +1,4 @@
 namespace Pokemon
 {
-    enum PokemonNature{None}
+    enum PokemonNature{None, Adamant}
 }
